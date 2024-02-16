@@ -18,7 +18,7 @@ const AddItem = ({ list, setList }) => {
     <div>
       <form>
         <div>
-          <label htmlFor="to-do-title">Enter item: </label>
+          <label htmlFor="to-do-item">Enter item: </label>
           <input 
            id="to-do-item"
            name="to-do-item"
