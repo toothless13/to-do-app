@@ -1,14 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import ListItem from './ListItem';
 
-const ListContainer = ({ list }) => {
+const ListContainer = ({ list, setList }) => {
 
   return (
     <>
       <div>ListContainer</div>
       <ul>
       {list.map(item =>
-        <ListItem item={item.item} key={uuidv4()} />
+        <ListItem {...item} setList={setList} key={uuidv4()} />
       )}
       </ul>
     </>

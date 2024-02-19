@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
 import AddItem from "./AddItem"
 import ListContainer from "./ListContainer"
 
@@ -7,13 +8,19 @@ const HomePage = () => {
   const initialState = {
     list: [
       {
-        item: "test 1"
+        item: "test 1",
+        completed: false,
+        id: uuidv4()
       },
       {
-        item: "test 2"
+        item: "test 2",
+        completed: false,
+        id: uuidv4()
       },
       {
-        item: "test 3"
+        item: "test 3",
+        completed: false,
+        id: uuidv4()
       }
     ],
   }

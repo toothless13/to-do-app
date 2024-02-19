@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, completed, id, setList }) => {
 
   const [editing, setEditing] = useState(false);
   const [edit, setEdit] = useState(item);
@@ -25,23 +25,27 @@ const ListItem = ({ item }) => {
     console.log(item);
     console.log(e.target.value);
     setEdit(e.target.value);
+    // console.log(edit);
   }
 
   const handleUpdateItem = e => {
     e.preventDefault();
+    console.log(e.target.parentElement.id);
     item = edit;
+    console.log(item);
   }
 
   if (editing) {
     return (
       <div>
-      <form>
+      <form id={id}>
         <div>
           <label htmlFor="to-do-item">Enter item: </label>
           <input 
            id="to-do-item"
            name="to-do-item"
-           value={item}
+          //  value={item}
+          placeholder={item}
           onChange={handleFieldChange}
           />
         </div>

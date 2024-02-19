@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddItem = ({ list, setList }) => {
 
@@ -10,7 +11,7 @@ const AddItem = ({ list, setList }) => {
 
   const handleAddItem = e => {
     e.preventDefault();
-    setList([...list, {item: field}]);
+    setList([...list, {item: field, completed: false, id: uuidv4()}]);
     setField("");
   }
 
