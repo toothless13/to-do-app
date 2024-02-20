@@ -5,11 +5,6 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
   const [editing, setEditing] = useState(false);
   const [editText, setEditText] = useState(todo);
 
-  const handleEditing = e => {
-    e.preventDefault();
-    setEditing(true);
-  }
-
   const handleFieldChange = e => {
     setEditText(e.target.value);
   }
@@ -22,37 +17,41 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
     setEditing(false);
   }
 
-  if (editing) {
-    return (
-      <div>
-      <form id={id} onSubmit={handleUpdateItem}>
-        <div>
-          <label htmlFor="to-do-item">Enter item: </label>
-          <input 
-           id="to-do-item"
-           name="to-do-item"
-           autoFocus
-           value={editText}
-           onChange={handleFieldChange}
-           onBlur={() => {
-            setEditing(false);
-            handleUpdate(id, editText);
-           }}
-          />
-        </div>
-        <button type="submit">Add!</button>
-      </form>
-    </div>
-    )
-  } else {
-    return (
-      <div className={completed ? "done" : ""}>
-        <input type="checkbox" onClick={() => handleComplete(id)} />
-        <div onClick={handleEditing}>{todo}</div>
-        <button onClick={() => handleDelete(id)}>&times;</button>
+  return (
+    <div>
+      <input type="checkbox" onClick={() => handleComplete(id)} />
+      <div className={completed ? "done" : ""}
+      onClick={() => {
+        if (!completed) {
+          setEditing(true);
+        }
+      }}
+    >
+      {editing ? (
+        <form id={id} onSubmit={handleUpdateItem}>
+          <div>
+            <input 
+              id="to-do-item"
+              name="to-do-item"
+              autoFocus
+              value={editText}
+              onChange={handleFieldChange}
+              onBlur={() => {
+              setEditing(false);
+              handleUpdate(id, editText);
+              }}
+              aria-label="edit input item"
+            />
+          </div>
+          <button type="submit">Add!</button>
+        </form>
+      ) : (
+        todo
+      )}
       </div>
-    )
-  }
+      <button onClick={() => handleDelete(id)}>&times;</button> 
+  </div>
+  )
 }
 
 export default ListItem
