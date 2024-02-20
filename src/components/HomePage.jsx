@@ -8,17 +8,17 @@ const HomePage = () => {
   const initialState = {
     list: [
       {
-        item: "test 1",
+        todo: "test 1",
         completed: false,
         id: uuidv4()
       },
       {
-        item: "test 2",
+        todo: "test 2",
         completed: false,
         id: uuidv4()
       },
       {
-        item: "test 3",
+        todo: "test 3",
         completed: false,
         id: uuidv4()
       }
