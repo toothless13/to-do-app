@@ -28,7 +28,7 @@ const HomePage = () => {
   const [list, setList] = useState(initialState.list);
 
   return (
-    <div>
+    <div className="w-1/3 mx-auto text-center">
       <ListContainer list={list} setList={setList} />
       <AddItem list={list} setList={setList} />
     </div>

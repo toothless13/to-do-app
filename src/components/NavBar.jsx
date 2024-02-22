@@ -8,9 +8,9 @@ const NavBar = ({ loggedIn, setLoggedIn }) => {
   }
 
   return (
-    <div className="flex justify-between p-3">
-      <Link reloadDocument to="/">To-Do App</Link>
-      <div className="user mx-2">
+    <div className="flex justify-between p-3 text-teal-400">
+      <Link reloadDocument to="/" className="text-xl font-bold">To-Do App</Link>
+      <div className="user mx-2 text-xl">
         {loggedIn ?  
           <button onClick={handleLogout} className="mx-2" >Logout</button>
           : 

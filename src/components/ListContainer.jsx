@@ -39,15 +39,14 @@ const ListContainer = ({ list, setList }) => {
   }
 
   return (
-    <>
-      <div>ListContainer</div>
+    <div>
       <ul>
         {/* {console.log(list)} */}
       {list.map(item =>
         <ListItem {...item} setList={setList} key={item.id} handleComplete={handleComplete} handleUpdate={handleUpdate} handleDelete={handleDelete}/>
       )}
       </ul>
-    </>
+    </div>
     
   )
 }

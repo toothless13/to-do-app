@@ -18,8 +18,8 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
   }
 
   return (
-    <div>
-      <input type="checkbox" onClick={() => handleComplete(id)} />
+    <div className="grid grid-cols-3">
+      <input type="checkbox" onClick={() => handleComplete(id)} className="mx-2" />
       <div className={completed ? "done" : ""}
       onClick={() => {
         if (!completed) {
@@ -49,7 +49,7 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
         todo
       )}
       </div>
-      <button onClick={() => handleDelete(id)}>&times;</button> 
+      <button onClick={() => handleDelete(id)} className="text-lg text-red-600" >&times;</button> 
   </div>
   )
 }
