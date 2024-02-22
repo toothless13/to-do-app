@@ -8,15 +8,15 @@ const NavBar = ({ loggedIn, setLoggedIn }) => {
   }
 
   return (
-    <div>
+    <div className="flex justify-between p-3">
       <Link reloadDocument to="/">To-Do App</Link>
-      <div className="user">
+      <div className="user mx-2">
         {loggedIn ?  
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="mx-2" >Logout</button>
           : 
           <div>
-            <NavLink to="login">Login</NavLink>
-            <NavLink to="sign-up">Sign Up</NavLink>
+            <NavLink to="login" className="mx-2">Login</NavLink>
+            <NavLink to="sign-up" className="mx-2" >Sign Up</NavLink>
           </div>}
       </div>
     </div>
