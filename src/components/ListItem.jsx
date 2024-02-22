@@ -17,10 +17,12 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
     setEditing(false);
   }
 
+  const todoTextClass = "col-span-5 text-left";
+
   return (
-    <div className="grid grid-cols-3">
-      <input type="checkbox" onClick={() => handleComplete(id)} className="mx-2" />
-      <div className={completed ? "done" : ""}
+    <div className="grid grid-cols-7 ga-3 rounded-full border-2 border-zinc-300 my-5 p-2">
+      <input type="checkbox" onClick={() => handleComplete(id)} className="mx-2 w-fit col-span-1" />
+      <div className={completed ?  todoTextClass + " done" : todoTextClass}
       onClick={() => {
         if (!completed) {
           setEditing(true);
@@ -49,7 +51,7 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
         todo
       )}
       </div>
-      <button onClick={() => handleDelete(id)} className="text-lg text-red-600" >&times;</button> 
+      <button onClick={() => handleDelete(id)} className="text-lg text-red-600 col-span-1" >&times;</button> 
   </div>
   )
 }

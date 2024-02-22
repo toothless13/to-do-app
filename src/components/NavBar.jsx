@@ -8,7 +8,7 @@ const NavBar = ({ loggedIn, setLoggedIn }) => {
   }
 
   return (
-    <div className="flex justify-between p-3 text-teal-400">
+    <div className="flex justify-between p-3 text-teal-400 border-solid border-b-2 border-zinc-300 mb-5">
       <Link reloadDocument to="/" className="text-xl font-bold">To-Do App</Link>
       <div className="user mx-2 text-xl">
         {loggedIn ?  
