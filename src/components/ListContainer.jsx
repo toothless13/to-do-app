@@ -39,7 +39,7 @@ const ListContainer = ({ list, setList }) => {
   }
 
   return (
-    <div>
+    <div className="">
       <ul>
         {/* {console.log(list)} */}
       {list.map(item =>

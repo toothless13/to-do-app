@@ -4,4 +4,6 @@
 
 .done {
   text-decoration: line-through;
+  text-decoration-color: #2dd4bf;
+  text-decoration-thickness: .2rem;
 }

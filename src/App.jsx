@@ -11,7 +11,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div className="bg-zinc-800 text-teal-400 min-h-screen">
+    <div className="bg-zinc-800 text-zinc-300 min-h-screen">
       <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
       <Routes>
         <Route path="/" element={<HomePage />} />

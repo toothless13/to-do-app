@@ -8,15 +8,15 @@ const NavBar = ({ loggedIn, setLoggedIn }) => {
   }
 
   return (
-    <div className="flex justify-between p-3 text-teal-400 border-solid border-b-2 border-zinc-300 mb-5">
-      <Link reloadDocument to="/" className="text-xl font-bold">To-Do App</Link>
-      <div className="user mx-2 text-xl">
+    <div className="flex justify-between items-center p-3 text-zinc-300 border-solid border-b-2 border-zinc-300 mb-5">
+      <Link reloadDocument to="/" className="text-xl font-bold hover:text-teal-400">To-Do App</Link>
+      <div className="user text-xl">
         {loggedIn ?  
-          <button onClick={handleLogout} className="mx-2" >Logout</button>
+          <a onClick={handleLogout} className="ml-2 hover:bg-teal-400 hover:text-zinc-800 hover:cursor-pointer p-4" >Logout</a>
           : 
           <div>
-            <NavLink to="login" className="mx-2">Login</NavLink>
-            <NavLink to="sign-up" className="mx-2" >Sign Up</NavLink>
+            <NavLink to="login" className="mx-2 hover:bg-teal-400 hover:text-zinc-800 p-4">Login</NavLink>
+            <NavLink to="sign-up" className="ml-2 hover:bg-teal-400 hover:text-zinc-800 p-4" >Sign Up</NavLink>
           </div>}
       </div>
     </div>

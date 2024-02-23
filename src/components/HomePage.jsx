@@ -28,7 +28,7 @@ const HomePage = () => {
   const [list, setList] = useState(initialState.list);
 
   return (
-    <div className="w-1/3 mx-auto text-center">
+    <div className="w-1/3 mx-auto text-center rounded-lg border-2 border-zinc-300 my-5 p-2">
       <ListContainer list={list} setList={setList} />
       <AddItem list={list} setList={setList} />
     </div>
