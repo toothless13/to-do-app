@@ -16,7 +16,7 @@ const AddItem = ({ list, setList }) => {
   return (
     <div className="my-5">
       <form onSubmit={handleAddItem} className="grid grid-cols-7 ga-3 pr-2">
-        <div className="col-span-6 w-full">
+        <div className="col-span-5 w-full">
           {/* <label htmlFor="to-do-item" className="mx-2 w-fit col-span-1">Enter item: </label> */}
           <input 
            id="to-do-item"
@@ -26,7 +26,7 @@ const AddItem = ({ list, setList }) => {
            className="w-4/5 rounded-lg h-10 text-zinc-800 pl-2"
           />
         </div>
-        <button type="submit" className="col-span-1 rounded-full hover:bg-zinc-300 hover:text-zinc-800 bg-zinc-800 text-zinc-300 border-2 border-zinc-300">Add!</button>
+        <button type="submit" className="col-span-2 rounded-full hover:bg-zinc-300 hover:text-zinc-800 bg-zinc-800 text-zinc-300 border-2 border-zinc-300">Add!</button>
       </form>
     </div>
   )
