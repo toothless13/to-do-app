@@ -9,8 +9,10 @@ const AddItem = ({ list, setList }) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const userInput = formData.get("to-do-item");
-    setList([...list, {todo: userInput, completed: false, id: uuidv4()}]);
-    inputRef.current.value = "";
+    if(userInput !== "") {
+      setList([...list, {todo: userInput, completed: false, id: uuidv4()}]);
+      inputRef.current.value = "";
+    }
   }
 
   return (
