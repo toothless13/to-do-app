@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
 
-const NavBar = ({ loggedIn, setLoggedIn }) => {
+const NavBar = () => {
 
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLogout = e => {
+  const handleLogout = async e => {
     e.preventDefault();
-    setLoggedIn(false);
-  }
+    await signOut(auth)
+      .then(() => {
+        console.log("User logged out");
+        setLoggedOut(true);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="flex justify-between items-center p-3 text-zinc-300 border-solid border-b-2 border-zinc-300 mb-5">
