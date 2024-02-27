@@ -3,13 +3,6 @@ import ListItem from './ListItem';
 const ListContainer = ({ list, setList }) => {
 
   const handleComplete = (id) => {
-    // e.preventDefault();
-    // console.log(e.target.style.textDecoration);
-    // if (e.target.style.textDecoration === "line-through") {
-    //   e.target.style.textDecoration = "none";
-    // } else {
-    //   e.target.style.textDecoration = "line-through";
-    // }
     const updatedList = list.map(item => {
       if (item.id === id) {
         item.completed = !item.completed;
@@ -25,7 +18,6 @@ const ListContainer = ({ list, setList }) => {
       if (item.id === id) {
         item.todo = todo;
       }
-
       return item;
     });
 
@@ -41,7 +33,6 @@ const ListContainer = ({ list, setList }) => {
   return (
     <div className="">
       <ul>
-        {/* {console.log(list)} */}
       {list.map(item =>
         <ListItem {...item} setList={setList} key={item.id} handleComplete={handleComplete} handleUpdate={handleUpdate} handleDelete={handleDelete}/>
       )}

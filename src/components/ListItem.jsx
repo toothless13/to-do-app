@@ -57,7 +57,6 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
               className="bg-zinc-800 text-teal-400 pl-2"
             />
           </div>
-          {/* <button type="submit">Add!</button> */}
         </form>
       ) : (
         todo
