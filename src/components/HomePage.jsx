@@ -1,9 +1,14 @@
-import { useState } from "react"
-import { v4 as uuidv4 } from 'uuid';
+import { useState, useContext, useEffect, useCallback } from "react"
+import { Context } from "../Context/AuthContext"
+import { db } from "../config/firebase"
+import { collection, getDocs } from "firebase/firestore"
+import { v4 as uuidv4 } from 'uuid'
 import AddItem from "./AddItem"
 import ListContainer from "./ListContainer"
 
 const HomePage = () => {
+
+  const { user } = useContext(Context);
 
   const initialState = {
     list: [
