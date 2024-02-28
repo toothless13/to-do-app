@@ -1,21 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
+import { Context } from "../Context/AuthContext";
 
 const NavBar = () => {
 
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [loggedOut, setLoggedOut] = useState(false);
+  // const [loggedOut, setLoggedOut] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(Context);
 
   const handleLogout = async e => {
     e.preventDefault();
     await signOut(auth)
       .then(() => {
         console.log("User logged out");
-        setLoggedOut(true);
+        // setLoggedOut(true);
         navigate("/");
       })
       .catch((error) => {
@@ -53,7 +55,7 @@ const NavBar = () => {
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </div>
-          {loggedIn ? 
+          {user ? 
             <ul className="nav-mobile-open flex flex-col items-center min-h-[250px]">
               <a onClick={(e) => {handleLogout(e); setIsNavOpen(false);}} className="ml-2 hover:bg-teal-400 hover:text-zinc-800 hover:cursor-pointer p-4" >Logout</a>
             </ul> :
@@ -77,8 +79,8 @@ const NavBar = () => {
         </div>
       </div>
       <div className="desktop-nav user text-xl hidden lg:flex">
-        {loggedIn ?  
-          <a onClick={() => {handleLogout; setIsNavOpen(false);}} className="ml-2 hover:bg-teal-400 hover:text-zinc-800 hover:cursor-pointer p-4" >Logout</a>
+        {user ?  
+          <a onClick={(e) => {handleLogout(e); setIsNavOpen(false);}} className="ml-2 hover:bg-teal-400 hover:text-zinc-800 hover:cursor-pointer p-4" >Logout</a>
           : 
           <div>
             <NavLink to="login" className="mx-2 hover:bg-teal-400 hover:text-zinc-800 p-4">Login</NavLink>
