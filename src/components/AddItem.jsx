@@ -17,8 +17,12 @@ const AddItem = ({ list, setList }) => {
   //     setList([...list, {todo: userInput, completed: false, id: uuidv4()}]);
   //     inputRef.current.value = "";
   //   }
-  // }
-  console.log(user);
+  // // }
+  // console.log(user);
+
+  const getUID = () => {
+    return Date.now().toString(36);
+  }
 
   const handleAddItem = async e => {
     e.preventDefault();
@@ -28,7 +32,7 @@ const AddItem = ({ list, setList }) => {
       const task = {
         todo: userInput, 
         completed: false, 
-        id: uuidv4(),
+        id: getUID(),
       }
       if (user) {
         try {
@@ -42,7 +46,7 @@ const AddItem = ({ list, setList }) => {
           console.log(error);
         }
       }
-      setList([...list, {todo: userInput, completed: false, id: uuidv4()}]);
+      setList([...list, {todo: userInput, completed: false, id: getUID()}]);
       inputRef.current.value = "";
     }
   }
