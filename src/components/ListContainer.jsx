@@ -1,7 +1,7 @@
 import { useContext, useEffect, useCallback } from "react"
 import { Context } from "../Context/AuthContext"
 import { db } from "../config/firebase"
-import { collection, query, getDocs } from "firebase/firestore"
+import { collection, query, getDocs, doc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore"
 import ListItem from './ListItem';
 
 const ListContainer = ({ list, setList }) => {
@@ -23,9 +23,7 @@ const ListContainer = ({ list, setList }) => {
     }
   }, [setList, user]);
 
-  useEffect(() => {
-    getUserTasks();
-  }, []);
+
 
   const handleComplete = (id) => {
     const updatedList = list.map(item => {
@@ -38,22 +36,33 @@ const ListContainer = ({ list, setList }) => {
     setList(updatedList);
   }
 
-  const handleUpdate = (id, todo) => {
-    const updatedList = list.map(item => {
-      if (item.id === id) {
-        item.todo = todo;
-      }
-      return item;
+  const handleUpdate = async (id, todo) => {
+    // const updatedList = list.map(item => {
+    //   if (item.id === id) {
+    //     item.todo = todo;
+    //   }
+    //   return item;
+    // });
+
+    await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+      "task.todo": todo,
+      updatedAt: serverTimestamp()
     });
-
-    setList(updatedList);
+    // setList(updatedList);
   }
 
-  const handleDelete = (id) => {
-    const updatedList = list.filter(item => item.id !== id);
+  const handleDelete = async (id) => {
+    console.log(id);
+    console.log(user.uid);
+    // const updatedList = list.filter(item => item.id !== id);
+    await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
 
-    setList(updatedList);
+    // setList(updatedList);
   }
+
+  useEffect(() => {
+    getUserTasks();
+  }, [handleDelete, handleUpdate]);
 
   return (
     <div className="">
