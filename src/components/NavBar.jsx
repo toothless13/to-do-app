@@ -19,6 +19,7 @@ const NavBar = () => {
         console.log("User logged out");
         // setLoggedOut(true);
         navigate("/");
+        navigate(0);
       })
       .catch((error) => {
         console.log(error);
