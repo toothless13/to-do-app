@@ -2,7 +2,6 @@ import { useRef, useContext } from "react";
 import { Context } from "../Context/AuthContext"
 import { setDoc, doc, serverTimestamp } from "firebase/firestore"
 import { db } from "../config/firebase"
-import { v4 as uuidv4 } from 'uuid';
 
 const AddItem = ({ list, setList }) => {
 

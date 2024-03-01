@@ -25,44 +25,64 @@ const ListContainer = ({ list, setList }) => {
 
 
 
-  const handleComplete = (id) => {
-    const updatedList = list.map(item => {
-      if (item.id === id) {
-        item.completed = !item.completed;
+  const handleComplete = async (id) => {
+    if (user) {
+      const task = list.find(item => item.id === id);
+      if (task.completed === false) {
+        await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+          "task.completed": true,
+          updatedAt: serverTimestamp()
+        });
+      } else {
+        await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+          "task.completed": false,
+          updatedAt: serverTimestamp()
+        });
       }
-      return item;
-    });
-
-    setList(updatedList);
+    } else {
+      const updatedList = list.map(item => {
+        if (item.id === id) {
+          item.completed = !item.completed;
+        }
+        return item;
+      });
+  
+      setList(updatedList);
+    }
   }
 
   const handleUpdate = async (id, todo) => {
-    // const updatedList = list.map(item => {
-    //   if (item.id === id) {
-    //     item.todo = todo;
-    //   }
-    //   return item;
-    // });
-
-    await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
-      "task.todo": todo,
-      updatedAt: serverTimestamp()
-    });
-    // setList(updatedList);
+    if (user) {
+      await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+        "task.todo": todo,
+        updatedAt: serverTimestamp()
+      });
+    } else {
+      const updatedList = list.map(item => {
+        if (item.id === id) {
+          item.todo = todo;
+        }
+        return item;
+      });
+      setList(updatedList);
+    }
   }
 
   const handleDelete = async (id) => {
-    console.log(id);
-    console.log(user.uid);
-    // const updatedList = list.filter(item => item.id !== id);
-    await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
+    // console.log(id);
+    // console.log(user.uid);
 
-    // setList(updatedList);
+    if (user) {
+      await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
+    } else {
+      const updatedList = list.filter(item => item.id !== id);
+      setList(updatedList);
+    } 
   }
 
   useEffect(() => {
     getUserTasks();
-  }, [handleDelete, handleUpdate]);
+  }, [handleDelete, handleUpdate, handleComplete]);
 
   return (
     <div className="">

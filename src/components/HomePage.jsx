@@ -1,8 +1,4 @@
-import { useState, useContext, useEffect, useCallback } from "react"
-import { Context } from "../Context/AuthContext"
-import { db } from "../config/firebase"
-import { collection, query, getDocs } from "firebase/firestore"
-import { v4 as uuidv4 } from 'uuid'
+import { useState } from "react"
 import AddItem from "./AddItem"
 import ListContainer from "./ListContainer"
 
