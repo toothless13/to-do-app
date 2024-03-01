@@ -2,6 +2,7 @@ import { useContext, useEffect, useCallback } from "react"
 import { Context } from "../Context/AuthContext"
 import { db } from "../config/firebase"
 import { collection, query, getDocs, doc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore"
+import toast, { Toaster } from "react-hot-toast"
 import ListItem from './ListItem';
 
 const ListContainer = ({ list, setList }) => {
@@ -10,7 +11,7 @@ const ListContainer = ({ list, setList }) => {
 
   const getUserTasks = useCallback(async () => {
     if (user) {
-      const q = query(collection(db, "tasks"));
+      try { const q = query(collection(db, "tasks"));
       const querySnapshot = await getDocs(q);
       let userList = [];
       querySnapshot.forEach(doc => {
@@ -18,8 +19,12 @@ const ListContainer = ({ list, setList }) => {
           userList.push(doc.data().task);
         }
       });
-      // console.log(userList);
       setList(userList);
+    } catch (error) {
+      toast.error(error.message);
+    }
+      // console.log(userList);
+      
     }
   }, [setList, user]);
 
@@ -27,17 +32,21 @@ const ListContainer = ({ list, setList }) => {
 
   const handleComplete = async (id) => {
     if (user) {
-      const task = list.find(item => item.id === id);
-      if (task.completed === false) {
-        await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
-          "task.completed": true,
-          updatedAt: serverTimestamp()
-        });
-      } else {
-        await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
-          "task.completed": false,
-          updatedAt: serverTimestamp()
-        });
+      try {
+        const task = list.find(item => item.id === id);
+        if (task.completed === false) {
+          await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+            "task.completed": true,
+            updatedAt: serverTimestamp()
+          });
+        } else {
+          await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+            "task.completed": false,
+            updatedAt: serverTimestamp()
+          });
+        }
+      } catch (error) {
+        toast.error(error.message);
       }
     } else {
       const updatedList = list.map(item => {
@@ -53,10 +62,14 @@ const ListContainer = ({ list, setList }) => {
 
   const handleUpdate = async (id, todo) => {
     if (user) {
-      await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
-        "task.todo": todo,
-        updatedAt: serverTimestamp()
-      });
+      try {
+        await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
+          "task.todo": todo,
+          updatedAt: serverTimestamp()
+        });
+      } catch (error) {
+        toast.error(error.message)
+      }
     } else {
       const updatedList = list.map(item => {
         if (item.id === id) {
@@ -69,11 +82,12 @@ const ListContainer = ({ list, setList }) => {
   }
 
   const handleDelete = async (id) => {
-    // console.log(id);
-    // console.log(user.uid);
-
     if (user) {
-      await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
+      try {
+        await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
+      } catch (error) {
+        toast.error(error.message);
+      }
     } else {
       const updatedList = list.filter(item => item.id !== id);
       setList(updatedList);
@@ -86,6 +100,7 @@ const ListContainer = ({ list, setList }) => {
 
   return (
     <div className="">
+      <Toaster />
       {!user && list.length == 0 ? <div>Add an item below</div> : 
         <ul>
           {list.map(item =>

@@ -2,6 +2,7 @@ import { useRef, useContext } from "react";
 import { Context } from "../Context/AuthContext"
 import { setDoc, doc, serverTimestamp } from "firebase/firestore"
 import { db } from "../config/firebase"
+import toast, { Toaster } from "react-hot-toast";
 
 const AddItem = ({ list, setList }) => {
 
@@ -47,11 +48,14 @@ const AddItem = ({ list, setList }) => {
       }
       setList([...list, {todo: userInput, completed: false, id: getUID()}]);
       inputRef.current.value = "";
+    } else {
+      toast.error("Please enter a task");
     }
   }
 
   return (
     <div className="my-5">
+      <Toaster />
       <form onSubmit={handleAddItem} className="grid grid-cols-7 ga-3 pr-2">
         <div className="col-span-5 w-full">
           {/* <label htmlFor="to-do-item" className="mx-2 w-fit col-span-1">Enter item: </label> */}
