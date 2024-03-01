@@ -86,13 +86,14 @@ const ListContainer = ({ list, setList }) => {
 
   return (
     <div className="">
-      <ul>
-        {list.map(item =>
-          <ListItem {...item} setList={setList} key={item.id} handleComplete={handleComplete} handleUpdate={handleUpdate} handleDelete={handleDelete}/>
-        )}
-      </ul>
+      {!user && list.length == 0 ? <div>Add an item below</div> : 
+        <ul>
+          {list.map(item =>
+            <ListItem {...item} setList={setList} key={item.id} handleComplete={handleComplete} handleUpdate={handleUpdate} handleDelete={handleDelete}/>
+          )}
+        </ul>
+      }
     </div>
-    
   )
 }
 
