@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import { Context } from "../Context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const NavBar = () => {
 
@@ -16,18 +17,21 @@ const NavBar = () => {
     e.preventDefault();
     await signOut(auth)
       .then(() => {
-        console.log("User logged out");
+        // console.log("User logged out");
         // setLoggedOut(true);
         navigate("/");
         navigate(0);
+        toast.success("You've logged out");
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error);
       });
   };
 
   return (
     <div className="flex justify-between items-center p-3 text-zinc-300 border-solid border-b-2 border-zinc-300 mb-5">
+      <Toaster />
       <Link reloadDocument to="/" className="text-xl font-bold hover:text-teal-400">To-Do App</Link>
       <div className="mobile-nav flex lg:hidden">
         <div 
