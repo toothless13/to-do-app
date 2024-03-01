@@ -21,7 +21,7 @@ Each of the handler functions then work depending on whether the user is signed 
 
 ## Styling
 
-Tailwind CSS was used for styling, with a few custom styles added
+Tailwind CSS was used for styling, with a few custom styles added.
 
 ## Improvements
 
