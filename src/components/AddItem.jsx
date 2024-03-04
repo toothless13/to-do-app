@@ -36,12 +36,11 @@ const AddItem = ({ list, setList }) => {
       }
       if (user) {
         try {
-          const test = await setDoc(doc(db, "tasks", `${task.id} - ${user.uid}`), {
+          await setDoc(doc(db, "tasks", `${task.id} - ${user.uid}`), {
             uid: user.uid,
             task: { ...task },
             createdAt: serverTimestamp()
           });
-          console.log(test);
         } catch (error) {
           console.log(error);
         }
