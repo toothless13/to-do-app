@@ -41,6 +41,7 @@ const AddItem = ({ list, setList }) => {
             task: { ...task },
             createdAt: serverTimestamp()
           });
+          console.log("Added");
         } catch (error) {
           console.log(error);
         }

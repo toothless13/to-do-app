@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useCallback } from "react"
 import { Context } from "../Context/AuthContext"
 import { db } from "../config/firebase"
 import { collection, query, getDocs, doc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore"
@@ -9,26 +9,7 @@ const ListContainer = ({ list, setList }) => {
 
   const { user } = useContext(Context);
 
-  // const getUserTasks = useCallback(async () => {
-  //   if (user) {
-  //     try { const q = query(collection(db, "tasks"));
-  //     const querySnapshot = await getDocs(q);
-  //     let userList = [];
-  //     querySnapshot.forEach(doc => {
-  //       if (doc.data().uid === user.uid) {
-  //         userList.push(doc.data().task);
-  //       }
-  //     });
-  //     setList(userList);
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
-  //     // console.log(userList);
-      
-  //   }
-  // }, [setList, user]);
-
-  const getUserTasks = async () => {
+  const getUserTasks = useCallback(async () => {
     if (user) {
       try { const q = query(collection(db, "tasks"));
       const querySnapshot = await getDocs(q);
@@ -45,10 +26,30 @@ const ListContainer = ({ list, setList }) => {
       // console.log(userList);
       
     }
-  }
+  }, [setList, user]);
+
+  // const getUserTasks = async () => {
+  //   if (user) {
+  //     try { const q = query(collection(db, "tasks"));
+  //     const querySnapshot = await getDocs(q);
+  //     let userList = [];
+  //     querySnapshot.forEach(doc => {
+  //       if (doc.data().uid === user.uid) {
+  //         userList.push(doc.data().task);
+  //       }
+  //     });
+  //     setList(userList);
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  //     // console.log(userList);
+      
+  //   }
+  // }
 
   const handleComplete = async (id) => {
     if (user) {
+      // console.log(user);
       try {
         const task = list.find(item => item.id === id);
         if (task.completed === false) {
