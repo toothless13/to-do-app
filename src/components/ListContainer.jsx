@@ -26,9 +26,9 @@ const ListContainer = ({ list, setList }) => {
       // console.log(userList);
       
     }
-  }, [setList, user]);
+  }, []);
 
-
+  // setList, user
 
   const handleComplete = async (id) => {
     if (user) {
@@ -40,11 +40,13 @@ const ListContainer = ({ list, setList }) => {
             "task.completed": true,
             updatedAt: serverTimestamp()
           });
+          task.completed = true;
         } else {
           await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
             "task.completed": false,
             updatedAt: serverTimestamp()
           });
+          task.completed = false;
         }
       } catch (error) {
         toast.error(error.message);
@@ -97,6 +99,7 @@ const ListContainer = ({ list, setList }) => {
 
   useEffect(() => {
     getUserTasks();
+    console.log("call");
   }, [handleDelete, handleUpdate, handleComplete]);
 
   return (
