@@ -40,15 +40,12 @@ const ListContainer = ({ list, setList }) => {
             "task.completed": true,
             updatedAt: serverTimestamp()
           });
-          task.completed = true;
         } else {
           await updateDoc(doc(db, "tasks", `${id} - ${user.uid}`), {
             "task.completed": false,
             updatedAt: serverTimestamp()
           });
-          task.completed = false;
         }
-        // getUserTasks();
       } catch (error) {
         toast.error(error.message);
       }
@@ -71,7 +68,6 @@ const ListContainer = ({ list, setList }) => {
           "task.todo": todo,
           updatedAt: serverTimestamp()
         });
-        getUserTasks();
       } catch (error) {
         toast.error(error.message)
       }
@@ -90,7 +86,6 @@ const ListContainer = ({ list, setList }) => {
     if (user) {
       try {
         await deleteDoc(doc(db, "tasks", `${id} - ${user.uid}`));
-        getUserTasks();
       } catch (error) {
         toast.error(error.message);
       }
@@ -102,8 +97,7 @@ const ListContainer = ({ list, setList }) => {
 
   useEffect(() => {
     getUserTasks();
-    console.log("call");
-  }, []);
+  }, [handleDelete, handleUpdate, handleComplete]);
 
   return (
     <div className="">
