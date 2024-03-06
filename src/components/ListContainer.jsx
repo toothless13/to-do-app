@@ -116,7 +116,7 @@ const ListContainer = ({ list, setList }) => {
   useEffect(() => {
     getUserTasks();
     console.log("call");
-  }, [handleDelete, handleUpdate, handleComplete]);
+  }, []);
 
   return (
     <div className="">
