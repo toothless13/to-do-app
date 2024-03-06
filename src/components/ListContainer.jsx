@@ -28,24 +28,7 @@ const ListContainer = ({ list, setList }) => {
     }
   }, [setList, user]);
 
-  // const getUserTasks = async () => {
-  //   if (user) {
-  //     try { const q = query(collection(db, "tasks"));
-  //     const querySnapshot = await getDocs(q);
-  //     let userList = [];
-  //     querySnapshot.forEach(doc => {
-  //       if (doc.data().uid === user.uid) {
-  //         userList.push(doc.data().task);
-  //       }
-  //     });
-  //     setList(userList);
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
-  //     // console.log(userList);
-      
-  //   }
-  // }
+
 
   const handleComplete = async (id) => {
     if (user) {
@@ -65,7 +48,7 @@ const ListContainer = ({ list, setList }) => {
           });
           task.completed = false;
         }
-        getUserTasks();
+        // getUserTasks();
       } catch (error) {
         toast.error(error.message);
       }
