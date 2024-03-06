@@ -32,7 +32,7 @@ const ListItem = ({ todo, completed, id, handleComplete, handleUpdate, handleDel
 
   return (
     <animated.div className="grid grid-cols-7 ga-3 items-center border-b-2 border-zinc-300 my-5 p-2" style={{...springs}}>
-      <input type="checkbox" onClick={() => handleComplete(id)} className="ml-1 mr-3 col-span-1 appearance-none w-4 h-4 border-2 rounded-full text-zinc-300 indeterminate:bg-zinc-300 checked:to-zinc-300 checked:bg-teal-400 hover:cursor-pointer" checked={completed ? true : false }/>
+      <input type="checkbox" onClick={() => handleComplete(id)} className="ml-1 mr-3 col-span-1 appearance-none w-4 h-4 border-2 rounded-full text-zinc-300 indeterminate:bg-zinc-300 checked:to-zinc-300 checked:bg-teal-400 hover:cursor-pointer" defaultChecked={completed ? true : false }/>
       <div className={completed ?  todoTextClass + " done" : todoTextClass}
       onClick={() => {
         if (!completed) {

@@ -67,6 +67,7 @@ const ListContainer = ({ list, setList }) => {
       } catch (error) {
         toast.error(error.message);
       }
+      getUserTasks();
     } else {
       const updatedList = list.map(item => {
         if (item.id === id) {
@@ -89,6 +90,7 @@ const ListContainer = ({ list, setList }) => {
       } catch (error) {
         toast.error(error.message)
       }
+      getUserTasks();
     } else {
       const updatedList = list.map(item => {
         if (item.id === id) {
@@ -107,6 +109,7 @@ const ListContainer = ({ list, setList }) => {
       } catch (error) {
         toast.error(error.message);
       }
+      getUserTasks();
     } else {
       const updatedList = list.filter(item => item.id !== id);
       setList(updatedList);
